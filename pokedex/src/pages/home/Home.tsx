@@ -6,6 +6,12 @@ import { getPokedex } from "../../store/actions/PokedexAction";
 
 const Home = ({data, dispatch}: any) => {
 
+  const splitId =  "https://pokeapi.co/api/v2/pokemon-species/25/";
+  const myId = splitId.split("/", 7)
+  const newID = myId.slice(6,7)
+  console.log(myId)
+  console.log(newID)
+
   useEffect(()=>{
     getPokedex(dispatch)
   },[])
