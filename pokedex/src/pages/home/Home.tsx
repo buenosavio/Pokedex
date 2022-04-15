@@ -1,24 +1,13 @@
-import { useEffect, useState } from "react";
+import { url } from "inspector";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { api } from "../../api";
-import { getPokedex, handlePokemon } from "../../store/actions/PokedexAction";
+import { Link } from "react-router-dom";
+import { getPokedex } from "../../store/actions/PokedexAction";
 
-const Home = ({pokemon_entries, dispatch}: any) => {
-
-  const [data, setData] = useState<any>([])
-
-  const getPokedex = async () => {
-    try {
-      const {data} = await api.get('/4')
-      const pokeList = (data.pokemon_entries) 
-      setData(pokeList)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const Home = ({data, dispatch}: any) => {
 
   useEffect(()=>{
-    getPokedex()
+    getPokedex(dispatch)
   },[])
 
   console.log(data)
@@ -26,21 +15,23 @@ const Home = ({pokemon_entries, dispatch}: any) => {
     <div>
       <div>Pokedex</div>
       <hr/>
-      <button onClick={() => handlePokemon('1', dispatch)}>pikaxu</button>
       {
-        data.map((e: { pokemon_species: any }) => (
-          //console.log(e.pokemon_species.name)
-          <h1>{e.pokemon_species.name}</h1>
-
+        data.map((e: { name: string, url: string, image: string, types:any }) => (
+          <div key={e.url.substring(34).replaceAll('/','')}>
+            <h1>{e.name}</h1>    
+            <p>{e.url.substring(34).replaceAll('/','')}</p>
+            {/* <p>{e.types[0].type.name}</p> */}
+            <img src={e.image} alt="" />      
+          </div>
         ))
       }
-    </div>
     
+    </div>
   )
 }
 
 const mapStateToProps = (state: any) => ({
-  pokemon_entries: state.PokedexReducer.pokemon_entries
+  data: state.PokedexReducer.data
 })
 
 export default connect(mapStateToProps)(Home);

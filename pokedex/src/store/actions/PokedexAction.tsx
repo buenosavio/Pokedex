@@ -1,29 +1,21 @@
-import { Action } from "redux"
 import { api } from "../../api"
 
-export const getPokedex = async () => {
-
+export const getPokedex = async (dispatch: any) => {
+  
   try {
-    const {data} = await api.get('/4')
-    const pokeList = (data.pokemon_entries)    
+    const {data} = await api.get('/pokemon?limit=1&offset=0')
+    let pokeList = (data.results)
+    let newPokeList:any = [];
+
+    pokeList.map((i: any) => {
+      const urlImage = (`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i.url.substring(34).replaceAll('/','')}.svg`)
+      i.image = urlImage;        
+      newPokeList.push(i)
+    })  
     
-    pokeList.forEach((e: { pokemon_species: any }) => {
-      console.log(e.pokemon_species.name)
-    })
+    dispatch({type:'GET_POKEDEX', newPokeList}) 
 
   } catch (error) {
     console.log(error)
   }
-}
-
-export const handlePokemon = (value: any, dispatch: any) => {
-
-  const variavel = {
-    type: 'GET_POKEDEX',
-    value
-  }
-
-  dispatch(variavel)
-
-  
 }
