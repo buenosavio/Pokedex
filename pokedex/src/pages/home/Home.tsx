@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { api } from "../../api";
-import { getPokedex, handlePokemon } from "../../store/actions/PokedexAction";
+import {handlePokemon } from "../../store/actions/PokedexAction";
 
 const Home = ({pokemon_entries, dispatch}: any) => {
 
@@ -26,7 +26,7 @@ const Home = ({pokemon_entries, dispatch}: any) => {
     <div>
       <div>Pokedex</div>
       <hr/>
-      <button onClick={() => handlePokemon('1', dispatch)}>pikaxu</button>
+      <button onClick={() => handlePokemon(dispatch)}>pikaxu</button>
       {
         data.map((e: { pokemon_species: any }) => (
           //console.log(e.pokemon_species.name)
