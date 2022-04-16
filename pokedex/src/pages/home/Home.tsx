@@ -35,8 +35,37 @@ const Home = ({data, dispatch}: any) => {
       return Color.fighting
     } else if (id === 'flying') {
       return Color.flying
-    } else {
+    } else if (id === 'poison') {
+      return Color.poison
+    } else if (id === 'ground') {
+      return Color.ground
+    } else if (id === 'rock') {
+      return Color.rock
+    } else if (id === 'bug') {
+      return Color.bug
+    } else if (id === 'ghost') {
+      return Color.ghost
+    } else if (id === 'steel') {
+      return Color.steel
+    } else if (id === 'fire') {
+      return Color.fire
+    } else if (id === 'water') {
+      return Color.water
+    } else if (id === 'grass') {
       return Color.grass
+    } else if (id === 'electric') {
+      return Color.electric
+    } else if (id === 'psychic') {
+      return Color.psychic
+    } else if (id === 'ice') {
+      return Color.ice
+    } else if (id === 'dragon') {
+      return Color.dragon
+    } else if (id === 'dark') {
+      return Color.dark
+    } 
+    else {
+      return Color.fairy
     }
   }
   
