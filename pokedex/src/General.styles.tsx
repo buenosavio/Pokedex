@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import background from './images/background.png'
 
@@ -18,6 +19,7 @@ export const Container = styled.div`
   border-radius: 12px;
   margin: auto auto;
   margin-top: 10%;
+  margin-bottom: 10%;
   padding: 10px;
 `;
 
@@ -28,3 +30,8 @@ display: grid;
   row-gap: 20px;
   column-gap: 20px;
 `;
+
+
+export const LinkStyled = styled(Link)`
+  text-decoration: none;
+`
