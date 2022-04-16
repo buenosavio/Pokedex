@@ -1,8 +1,8 @@
 import { url } from "inspector";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getPokedex } from "../../store/actions/PokedexAction";
+import { Link, useNavigate } from "react-router-dom";
+import { getPokedex, GetDetails } from "../../store/actions/PokedexAction";
 import { AiOutlineSearch, AiOutlineSortAscending } from "react-icons/ai";
 
 import { Container, Columns, ContainerGeral } from "../../General.styles";
@@ -20,6 +20,7 @@ import Color from "../../enum/ColorsEnum";
 const Home = ({data, dispatch}: any) => {
 
   const [search, setSearch] = useState("")
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getPokedex(dispatch)
@@ -99,7 +100,9 @@ const Home = ({data, dispatch}: any) => {
               <ImgStyled src={e.image} alt={e.name}/>
               
               <Description color={getColor(e.principalType)}><p>{e.name}</p></Description>              
-                 
+                 <button type="button" onClick={() => GetDetails
+                  (dispatch,navigate,`${e.url.substring(34).replaceAll('/','')}` )}>Details</button>
+            
             </DivStyled>
           )
           )
@@ -107,11 +110,15 @@ const Home = ({data, dispatch}: any) => {
         </Columns>
     </Container>
     </ContainerGeral>
+    
   )
+
 }
+console.log('detalhes' ,GetDetails)
 
 const mapStateToProps = (state: any) => ({
   data: state.PokedexReducer.data
+
 })
 
 export default connect(mapStateToProps)(Home);

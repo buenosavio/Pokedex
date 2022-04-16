@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
@@ -41,20 +42,45 @@ export const getPokedex = async (dispatch: any) => {
 }
 
 
-export const GetDetails = async (state: any, dispatch: any) => {
-  state.newPokeList.map(async(e: any) =>{
-    try {
-        const {data} = await axios.get('urlpokemonCOMID')
-        // verificar a url correta
-        const Details = {
-          type : "GET_DETAILS",
-          details: data,
-        }
-        dispatch(Details)
-    } catch (error) {
-      
-    }
-  })
+export const GetDetails = async (dispatch: any, navigate:any,id:any) => {
+
+
+  try {
+    const {data} = await api.get('/pokemon?limit=100&offset=0')
+    let pokeList = await (data.results)
+    let pokemonDetails:any = []; 
+
+    pokeList.map((i: any) => {
+      const urlImage = (`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i.url.substring(34).replaceAll('/','')}.svg`)
+      i.image = urlImage;        
+      pokemonDetails.push(i)
+    })  
+
+    pokemonDetails.map(async (i: any) => {
+      try {
+        const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${i.url.substring(34).replaceAll('/','')}`)
+        const types = (data.types)
+
+        let typeName:any = [];
+        types.map((e: any) => {
+          typeName.push(e.type.name)
+        })
+        i.typename = typeName;
+        i.principalType   = typeName[0];
+
+        pokemonDetails.shift(i)
+        pokemonDetails.push(i)        
+      } catch (error) {
+        console.log(error)
+      }
+      navigate('/detail/' + `${id}`)
+    })
+    
+    dispatch({type:'GET_DETAILS', pokemonDetails}) 
+
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const sortListId = async (dispatch: any) => {}
