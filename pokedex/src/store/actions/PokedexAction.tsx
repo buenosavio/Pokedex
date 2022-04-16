@@ -16,7 +16,7 @@ export const getPokedex = async (dispatch: any) => {
     newPokeList.map(async (i: any) => {
       try {
         const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${i.url.substring(34).replaceAll('/','')}`)
-        const types = (data.types)
+        const types = await (data.types)
 
         let typeName:any = [];
         types.map((e: any) => {
