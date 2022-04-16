@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Vector from '../../images/Vector.png'
 
 export const DivStyled = styled.div`
   width: 104px;
@@ -45,3 +46,35 @@ export const Description = styled.p`
   color: white;
 `;
 
+export const InputSearch = styled.input`
+height: 24px;
+width: 328px;
+left: 16px;
+top: 64px;
+border-radius: 8px;
+padding: 4px, 8px, 4px, 8px;
+
+
+::placeholder{
+  text-align: center;
+  background-image: url(${Vector});
+  background-repeat: no-repeat;
+}
+`;
+
+
+export const HeaderContainer = styled.header`
+  display: grid;
+  margin: 5px 5px 5px 5px;
+`;
+
+export const TitlePokedex = styled.h1`
+font-family: Poppins;
+font-size: 24px;
+font-weight: 700;
+line-height: 32px;
+letter-spacing: 0em;
+text-align: left;
+color: rgba(33, 33, 33, 1);
+;
+`;

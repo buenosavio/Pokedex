@@ -1,5 +1,6 @@
 const INITIAL_VALUES = {
-  data: []
+  data: [],
+  details: [],
 }
 
 const PokedexReducer = (state = INITIAL_VALUES, action: any) => {
@@ -7,6 +8,12 @@ const PokedexReducer = (state = INITIAL_VALUES, action: any) => {
     return {
       ...state,
       data: action.newPokeList
+    }
+  }
+  if(action.type === 'GET_DETAILS'){
+    return{
+      ...state,
+      details: [...state.details, action.details]
     }
   }
   return state;
