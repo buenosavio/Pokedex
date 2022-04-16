@@ -9,7 +9,7 @@ export const DivStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #74CB48;
+  border: 1px solid ${(props: any) => props.color};;
   box-sizing: border-box;
   border-radius: 8px;
 `;
@@ -20,7 +20,7 @@ export const IdPokemon = styled.p`
   text-align: end;
   margin-right: 10px;
   font-size: 8px;
-  color: #74CB48;
+  color: ${(props: any) => props.color};;
 `;
 
 export const ImgStyled = styled.img`

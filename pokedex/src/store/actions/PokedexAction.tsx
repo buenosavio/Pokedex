@@ -1,10 +1,9 @@
-import axios from "axios";
 import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
 
   try {
-    const {data} = await api.get('/pokemon?limit=6&offset=0')
+    const {data} = await api.get('/pokemon?limit=18&offset=0')
     let pokeList = await (data.results)
     let newPokeList:any = []; 
 
@@ -40,22 +39,37 @@ export const getPokedex = async (dispatch: any) => {
   }
 }
 
+export const handlePokemon = (details: any, dispatch: any) => {
+  
+  console.log(details)
 
-export const GetDetails = async (state: any, dispatch: any) => {
-  state.newPokeList.map(async(e: any) =>{
-    try {
-        const {data} = await axios.get('urlpokemonCOMID')
-        // verificar a url correta
-        const Details = {
-          type : "GET_DETAILS",
-          details: data,
-        }
-        dispatch(Details)
-    } catch (error) {
-      
-    }
-  })
+  const Details = {
+    type : "GET_DETAILS",
+    details,
+  }
+
+  dispatch(Details)
+
 }
+
+export const GetDetails = async (dispatch: any) => {
+  // newPokeList.map(async(e: any) =>{
+
+    // console.log(e)
+    // try {
+    //     const {data} = await axios.get('urlpokemonCOMID')
+    //     // verificar a url correta
+    //     const Details = {
+    //       type : "GET_DETAILS",
+    //       details: data,
+    //     }
+    //     dispatch(Details)
+    // } catch (error) {
+      
+    // }
+  // })
+}
+
 
 export const sortListId = async (dispatch: any) => {}
 
