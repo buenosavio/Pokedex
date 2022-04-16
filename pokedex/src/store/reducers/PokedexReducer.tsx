@@ -1,6 +1,7 @@
 const INITIAL_VALUES = {
   activePokemon: {},
   data: [],
+  details: []
 }
 
 const PokedexReducer = (state = INITIAL_VALUES, action: any) => {
