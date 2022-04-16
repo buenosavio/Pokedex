@@ -1,14 +1,25 @@
 import { url } from "inspector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPokedex } from "../../store/actions/PokedexAction";
+import { AiOutlineSearch, AiOutlineSortAscending } from "react-icons/ai";
 
-import { Container } from "../../General.styles";
-import { DivStyled, ImgStyled, Description, IdPokemon } from "./Home.styles";
+import { Container, Columns, ContainerGeral } from "../../General.styles";
+import { 
+DivStyled, 
+ImgStyled, 
+IdPokemon,
+InputSearch,
+Description, 
+TitlePokedex, 
+HeaderContainer,
+} from "./Home.styles";
 import Color from "../../enum/ColorsEnum";
 
 const Home = ({data, dispatch}: any) => {
+
+  const [search, setSearch] = useState("")
 
   useEffect(()=>{
     getPokedex(dispatch)
@@ -30,11 +41,30 @@ const Home = ({data, dispatch}: any) => {
   }
   
   return (
-    <>
-    <div>Pokedex</div>
+    <ContainerGeral>
     <Container>
-        {
-          data.map((e: { name: string, url: string, image: string, typename: any, principalType: any }) => (
+
+    <HeaderContainer>
+    <TitlePokedex>Pokédex <AiOutlineSortAscending/></TitlePokedex>
+    <InputSearch
+    type="text" 
+    placeholder= "Procurar"
+    onChange={(e) => setSearch(e.target.value)}
+    />
+    </HeaderContainer>
+      <Columns>
+    
+        { 
+          data.filter((value:any) =>{
+          if(search === ""){
+            return(value)
+          }else if(value.name.toLowerCase().includes(search.toLowerCase())){
+            return (value)
+          } else if (value.url.substring(34).replaceAll('/','').includes(search.toLowerCase())){
+            return (value)
+          }
+        })
+          .map((e: { name: string, url: string, image: string, typename: any, principalType: any }) => (
             <DivStyled key={e.url.substring(34).replaceAll('/','')}>
               <IdPokemon>#{e.url.substring(34).replaceAll('/','')}</IdPokemon>              
               <ImgStyled src={e.image} alt={e.name}/>
@@ -45,8 +75,9 @@ const Home = ({data, dispatch}: any) => {
           )
           )
         }
+        </Columns>
     </Container>
-    </>
+    </ContainerGeral>
   )
 }
 

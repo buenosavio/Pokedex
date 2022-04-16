@@ -1,3 +1,4 @@
+import axios from "axios";
 import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
@@ -38,3 +39,23 @@ export const getPokedex = async (dispatch: any) => {
     console.log(error)
   }
 }
+
+
+export const GetDetails = async (state: any, dispatch: any) => {
+  state.newPokeList.map(async(e: any) =>{
+    try {
+        const {data} = await axios.get('urlpokemonCOMID')
+        // verificar a url correta
+        const Details = {
+          type : "GET_DETAILS",
+          details: data,
+        }
+        dispatch(Details)
+    } catch (error) {
+      
+    }
+  })
+}
+
+export const sortListId = async (dispatch: any) => {}
+
