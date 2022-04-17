@@ -26,7 +26,7 @@ const Home = ({data, dispatch}: any) => {
   return (
     <Container>
       <HeaderContainer>
-       <Header />
+        <Header/>
         <InputStyled>
           <InputSearch type="text" placeholder= "Procurar" onChange={(e) => setSearch(e.target.value)}/>
           {(search) ? null : <IconSearch/> }               

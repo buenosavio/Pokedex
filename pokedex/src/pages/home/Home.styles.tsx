@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Vector from '../../images/Vector.png'
+import Vector from '../../components/imgvector/Vector.svg'
 
 export const DivStyled = styled.div`
   width: 104px;

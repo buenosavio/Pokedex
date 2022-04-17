@@ -1,25 +1,54 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import { Columns, } from "../../General.styles";
+import {
+GridInfo,
+Container,
+ImgPokemon,
+ImgPokeball,
+HeaderDetails,
+ContainerStats,
+} from './Details.styles'
+
+import Color from "../../enum/ColorsEnum";
+import pokeball from '../../components/images/pokeball/Pokeball.png'
 
 const Details = ({activePokemon, dispatch}: any) => {
 
   return (
     <>
+    <Container color={Color[activePokemon.typename[0]]}>
+      <ImgPokeball src={pokeball} alt="pokeball"/>
     <div>
-      <p>#{activePokemon.url.substring(34).replaceAll('/','')}</p>
+      <HeaderDetails>
       <h1>{activePokemon.name}</h1>
-      <img src={activePokemon.image} alt="" />
+      <p>#{activePokemon.url.substring(34).replaceAll('/','')}</p>
+      </HeaderDetails>
+      <ImgPokemon src={activePokemon.image} alt="" />
       <p>{activePokemon.typename[0]}</p>
       <p>{activePokemon.typename[1]}</p>
     </div>
-
+      
     {/* about */}
+    <ContainerStats>
     <div>
-      <h1>About</h1>
-      <p>Height: {activePokemon.height}</p>
-      <p>Weight: {activePokemon.weight}</p>
-      <p>Moves: {activePokemon.moviments[0]}</p>
-      <p>Moves: {activePokemon.moviments[1]}</p>
+      <h1 >About</h1>
+      <GridInfo>
+            <div>     
+            <p>{activePokemon.weight}kg</p>
+            <h3> Weight:</h3>  
+            </div>
+            <div>
+            <p>{activePokemon.height}m</p>
+            <h3>Height:</h3>
+            </div>
+            <div>          
+            <p>{activePokemon.moviments[0]}</p>
+            <p>{activePokemon.moviments[1]}</p>
+            <h3> Moves:</h3>
+            </div>
+        
+      </GridInfo>
     </div>
 
     {/* stats */}
@@ -32,6 +61,8 @@ const Details = ({activePokemon, dispatch}: any) => {
       <p>Special-Defense: {activePokemon.habilities[4].base_stat}</p>
       <p>Speed: {activePokemon.habilities[5].base_stat}</p>
     </div>
+    </ContainerStats>
+    </Container>
     </>
   )
 }

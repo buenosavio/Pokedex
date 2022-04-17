@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import background from './images/background.png'
 
 
-export const ContainerGeral = styled.div`
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  margin-top: -153px;
-`;
+// export const ContainerGeral = styled.div`
+//   background-image: url(${background});
+//   background-repeat: no-repeat;
+//   margin-top: -153px;
+// `;
 
 export const Container = styled.div`
   max-width: 360px ;
