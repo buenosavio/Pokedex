@@ -2,7 +2,7 @@ import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
   try {
-    const {data} = await api.get('/pokemon?limit=50&offset=0')
+    const {data} = await api.get('/pokemon?limit=9&offset=0')
     let pokeList = await (data.results)
     let newPokeList:any = []; 
 
@@ -68,6 +68,4 @@ export const handlePokemon = (details: any, dispatch: any) => {
 
   dispatch(Details)
 }
-
-export const sortListId = async (dispatch: any) => {}
 

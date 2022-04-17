@@ -47,34 +47,48 @@ export const Description = styled.p`
 `;
 
 export const InputSearch = styled.input`
-height: 24px;
-width: 328px;
-left: 16px;
-top: 64px;
-border-radius: 8px;
-padding: 4px, 8px, 4px, 8px;
-
-
-::placeholder{
-  text-align: center;
-  background-image: url(${Vector});
-  background-repeat: no-repeat;
-}
+  height: 24px;
+  max-width: 360px;
+  width: 360px ;
+  left: 16px;
+  top: 64px;
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 4px, 8px, 4px, 8px;
+  ::placeholder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;;
+  }
+  :focus {
+    outline: 0;
+    border-color: #aeaeb1 ; 
+    padding: 10px;
+  }
 `;
 
+export const IconSearch = styled.img.attrs({src: `${Vector}`})`
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 30%;
+  left: 38%;
+`;
+
+export const InputStyled = styled.div`
+  position: relative;
+  top:0; right:0;
+`;
 
 export const HeaderContainer = styled.header`
-  display: grid;
-  margin: 5px 5px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 360px ;
+  margin-bottom: 20px;
 `;
 
-export const TitlePokedex = styled.h1`
-font-family: Poppins;
-font-size: 24px;
-font-weight: 700;
-line-height: 32px;
-letter-spacing: 0em;
-text-align: left;
-color: rgba(33, 33, 33, 1);
-;
-`;
