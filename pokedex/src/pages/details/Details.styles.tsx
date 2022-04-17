@@ -59,13 +59,25 @@ export const ImgPokemon = styled.img`
   z-index: 100;
 `;
 
-
+//Styled card about Info
 export const GridInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
-  padding: 15px 0;
-`
+  font-size: 10px;
+`;
+
+export const PokemonInfos = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+export const LeftDiv = styled.div`
+border-left: 1px solid #e0e0e0;
+`;
+
 
 export const StatsText = styled.div`
     color: black;

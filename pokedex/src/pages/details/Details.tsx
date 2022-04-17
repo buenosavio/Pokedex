@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Columns, } from "../../General.styles";
 import {
 Barra,
+LeftDiv,
 TypeOne,
 TypeTwo,
 ArrowImg,
@@ -11,6 +12,7 @@ ArrowBack,
 StatsText,
 Container,
 TypeTitle,
+PokemonInfos,
 ImgPokemon,
 AboutTitle,
 ImgPokeball,
@@ -56,18 +58,20 @@ const Details = ({activePokemon, dispatch}: any) => {
       <AboutTitle color={Color[activePokemon.typename[0]]} >About</AboutTitle>
       <GridInfo>
             <div>     
-            <p>{activePokemon.weight}kg</p>
-            <h3> Weight:</h3>  
+            <p>{activePokemon.weight} kg</p>
+            <h3> Weight</h3>  
             </div>
-            <div>
-            <p>{activePokemon.height}m</p>
-            <h3>Height:</h3>
+            <LeftDiv>
+              <div>
+            <p>{activePokemon.height} m</p>
+            <h3>Height</h3>
             </div>
-            <div>          
+            </LeftDiv>
+            <LeftDiv>          
             <p>{activePokemon.moviments[0]}</p>
             <p>{activePokemon.moviments[1]}</p>
-            <h3> Moves:</h3>
-            </div>
+            <h3>Moves</h3>
+            </LeftDiv>
         
       </GridInfo>
     </div>
@@ -83,14 +87,16 @@ const Details = ({activePokemon, dispatch}: any) => {
     <p>SDEF</p>
     <p>SPD</p>
     </div>
-      <div>
+      <LeftDiv>
+        <div>
             <p>{activePokemon.habilities[0].base_stat}</p>
             <p>{activePokemon.habilities[1].base_stat}</p>
             <p>{activePokemon.habilities[2].base_stat}</p>
             <p>{activePokemon.habilities[3].base_stat}</p>
             <p>{activePokemon.habilities[4].base_stat}</p>
             <p>{activePokemon.habilities[5].base_stat}</p>
-      </div>
+            </div>
+      </LeftDiv>
       <Barra>
       <DivHabilities 
         color={Color[activePokemon.typename[0]]}
