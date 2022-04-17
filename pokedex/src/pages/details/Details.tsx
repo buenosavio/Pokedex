@@ -20,6 +20,7 @@ HeaderDetails,
 DivHabilities,
 ContainerStats,
 BaseStatsTitle,
+DivHabilitiesBackGround,
 } from './Details.styles'
 
 import Color from "../../enum/ColorsEnum";
@@ -27,16 +28,18 @@ import pokeball from '../../components/images/pokeball/Pokeball.png'
 import seta from '../../components/images/Seta/Seta.svg'
 
 const Details = ({activePokemon, dispatch}: any) => {
+const colorPokemon = Color[activePokemon.typename[0]];
 
   return (
     <>
     <Container color={Color[activePokemon.typename[0]]}>
+      
+    <div style={{height: "110px"}}>
       <ImgPokeball src={pokeball} alt="pokeball"/>
-    <div>
       <HeaderDetails>
       <ArrowBack to="/"><ArrowImg src={seta} /></ArrowBack>
-      <h1>{activePokemon.name}</h1>
-      <p> {activePokemon.url.substring(34).replaceAll('/','')< 10
+      <h2 style={{margin: "-9px 0px 0px -130px"}}>{activePokemon.name}</h2>
+      <p style={{margin: "-1px 0px 0px 0px"}}> {activePokemon.url.substring(34).replaceAll('/','')< 10
                   ? `#00${activePokemon.url.substring(34).replaceAll('/','')}`
                   : activePokemon.url.substring(34).replaceAll('/','') < 100
                   ? `#0${activePokemon.url.substring(34).replaceAll('/','')}`
@@ -52,7 +55,7 @@ const Details = ({activePokemon, dispatch}: any) => {
     <ContainerStats>
     <TypeTitle>
     <TypeOne color={Color[activePokemon.typename[0]]}>{activePokemon.typename[0]}</TypeOne>
-    <TypeTwo color={Color[activePokemon.typename[1]]}>{activePokemon.typename[1]}</TypeTwo>
+    {activePokemon.typename[1] ? <TypeTwo color={Color[activePokemon.typename[1]]}>{activePokemon.typename[1]}</TypeTwo> : ""}
     </TypeTitle>
     <div>
       <AboutTitle color={Color[activePokemon.typename[0]]} >About</AboutTitle>
@@ -74,6 +77,9 @@ const Details = ({activePokemon, dispatch}: any) => {
             </LeftDiv>
         
       </GridInfo>
+      <div>
+        <p>{activePokemon.flavorText.replace(/\n/g, ' ').replace(/\f/g, '')}</p>
+      </div>
     </div>
 
     {/* stats */}
@@ -98,10 +104,60 @@ const Details = ({activePokemon, dispatch}: any) => {
             </div>
       </LeftDiv>
       <Barra>
-      <DivHabilities 
-        color={Color[activePokemon.typename[0]]}
-        percent = {`${activePokemon.habilities[0].base_stat}`}
-        ></DivHabilities>
+        {/* {activePokemon.habilities.map((item: any) => {
+           <DivHabilitiesBackGround  
+           color={colorPokemon} 
+           percent = {`${item.base_stat}`} 
+          >
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${item.base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+        })} */}
+         <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[0].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+          <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[1].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+          <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[2].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+          <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[3].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+          <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[4].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
+          <DivHabilitiesBackGround color={colorPokemon}>
+            <DivHabilities 
+              color={colorPokemon}
+              percent = {`${activePokemon.habilities[5].base_stat}`}
+            >
+            </DivHabilities>
+          </DivHabilitiesBackGround>
       </Barra>
 
     </StatsText>

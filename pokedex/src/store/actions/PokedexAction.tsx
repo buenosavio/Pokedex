@@ -27,8 +27,9 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
     try {
       const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${i.url.substring(34).replaceAll('/','')}`);
       const types = data.types;
-      
-      console.log(data);
+
+      const result = await api.get(`https://pokeapi.co/api/v2/pokemon-species/${i.url.substring(34).replaceAll('/','')}`);
+      const flavor_text = result ? result.data.flavor_text_entries[0].flavor_text : "";
 
       let typeName:any = [];
       types.map((e: any) => {
@@ -51,6 +52,7 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
       i.height = data.height/10;
       i.habilities = habilities;
       i.moviments = moviments;
+      i.flavorText = flavor_text;
 
       listaaux.push(i);    
          

@@ -13,7 +13,7 @@ export const Container = styled.div`
   border-radius: 12px;
   margin: auto auto;
   margin-top: 1%;
-  padding: 10px;
+  padding: 4px;
 `;
 
 
@@ -30,7 +30,7 @@ export const IdPokemon = styled.p`
 export const HeaderDetails = styled.header`
   display: flex;
   justify-content: space-between;
-  height: 70px;
+  height: 20px;
   padding: 20px;
   color: #fff;
   text-transform: capitalize;
@@ -40,13 +40,15 @@ export const ContainerStats = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  background-size: auto 30px;
   border-radius: 8px;
-  padding: 100px 20px 20px 20px;
+  margin: 110px 0px 0px 0px;
+ // padding: 100px 20px 20px 20px;
 `;
 
 export const ImgPokeball = styled.img`
   width: 208px;
-  margin-left: 144px;
+  margin: 5px 0px 0px 190px;
   position: absolute;
   z-index: 1;
   text-align: center;
@@ -54,8 +56,9 @@ export const ImgPokeball = styled.img`
 
 export const ImgPokemon = styled.img`
   position: absolute;
-  max-width: 200px;
-  margin-left:calc(290px/2);
+  width: 200px;
+  height: 200px;
+  margin: 0px 0px 0px 100px;
   z-index: 100;
 `;
 
@@ -89,16 +92,21 @@ export const StatsText = styled.div`
 export const Barra = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 22px;
 `;
 
-
-export const DivHabilities = styled.div<{ percent: any, color: string}>`
-    background-image: linear-gradient(to right, color = ${(props: any) => props.color}, ${(props: any) => (props.percent)}%);
+export const DivHabilitiesBackGround = styled.div<{color: string}>`
+    background-color: ${(props: any) => props.color}50;
     width: 248px;
     height: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+`;
+
+export const DivHabilities = styled.div<{ percent: any, color: string}>`
+    background-color: ${(props: any) => props.color};
+    width: ${(props: any) => (props.percent)}%;
+    max-width: 100%;
+    height: 10px;
 `;
 
 export const ArrowBack = styled(Link)`
@@ -144,7 +152,7 @@ export const TypeTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 35%;
+  margin-top: 20px;
 `;
 
 export const TypeOne = styled.h3`
