@@ -20,6 +20,9 @@ export const getPokedex = async (dispatch: any) => {
 }
 
 const fitPokeList = async(newPokeList: any[], dispatch: any) => {
+
+  let listaaux: any[] = [];
+
   newPokeList.map(async (i: any) => {
     try {
       const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${i.url.substring(34).replaceAll('/','')}`);
@@ -49,10 +52,9 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
       i.habilities = habilities;
       i.moviments = moviments;
 
-      newPokeList.shift();
-      newPokeList.push(i);      
+      listaaux.push(i);    
          
-      if(newPokeList.filter((i) => i.principalType !== "").length === newPokeList.length)
+      if(listaaux.length === newPokeList.length)
       {
         dispatch({type:'GET_POKEDEX', newPokeList});
       }
