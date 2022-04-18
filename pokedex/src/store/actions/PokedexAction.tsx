@@ -2,7 +2,7 @@ import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
   try {
-    const {data} = await api.get('/pokemon?limit=386&offset=0')
+    const {data} = await api.get('/pokemon?limit=10&offset=0')
     let pokeList = await (data.results)
     let newPokeList:any = []; 
 
@@ -47,7 +47,8 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
       })
 
       i.typename = typeName;
-      i.principalType = typeName[0];
+      i.principalType = typeName[0] ? typeName[0] : null;
+      i.secondaryType = typeName[1] ? typeName[1] : null
       i.weight = data.weight/10;
       i.height = data.height/10;
       i.habilities = habilities;
