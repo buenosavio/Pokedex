@@ -37,8 +37,6 @@ import GetIdPokemon from "../../Utils/GetIdPokemon";
 
 const Details = ({activePokemon}: any) => {
 
-let contador = 0;
-
 const colorPokemon = Color[activePokemon.principalType];
   return (
   <>
@@ -72,10 +70,14 @@ const colorPokemon = Color[activePokemon.principalType];
               </div>
             </LeftDiv>
             <LeftDiv>          
-              {                
-                activePokemon.moviments.map((moviment: string) => (                  
-                  <ActiveP>{moviment}</ActiveP>
-                ))
+              {                            
+                activePokemon.moviments.map((moviment: string, index: number) => {
+                  if(index < 2){
+                    return (
+                      <ActiveP>{moviment}</ActiveP>
+                    )
+                  }
+                })
               }
               <ActiveH3>Moves</ActiveH3>
             </LeftDiv>        
