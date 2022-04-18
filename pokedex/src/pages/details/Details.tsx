@@ -40,7 +40,7 @@ const Details = ({activePokemon}: any) => {
 const colorPokemon = Color[activePokemon.principalType];
   return (
   <>
-   <BackgroundImg>
+   {/* <BackgroundImg> */}
     <Container color={colorPokemon}>
       <DivHeader>
         <ImgPokeball src={pokeball} alt="pokeball"/>
@@ -104,7 +104,7 @@ const colorPokemon = Color[activePokemon.principalType];
         }        
       </ContainerStats>
     </Container>
-    </BackgroundImg>
+    {/* </BackgroundImg> */}
   </>
   )
 }

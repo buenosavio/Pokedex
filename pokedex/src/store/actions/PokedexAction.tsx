@@ -6,10 +6,10 @@ export const getPokedex = async (dispatch: any) => {
     let pokeList = await (data.results)
     let newPokeList:any = []; 
 
-    pokeList.map((i: any) => {
-      const urlImage = (`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i.url.substring(34).replaceAll('/','')}.svg`);
-      i.image = urlImage;        
-      newPokeList.push(i);
+    pokeList.map((pokemon: any) => {
+      const urlImage = (`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.url.substring(34).replaceAll('/','')}.svg`);
+      pokemon.image = urlImage;        
+      newPokeList.push(pokemon);
     })  
 
     await fitPokeList(newPokeList, dispatch);
@@ -23,12 +23,12 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
 
   let listaaux: any[] = [];
 
-  newPokeList.map(async (i: any) => {
+  newPokeList.map(async (pokemon: any) => {
     try {
-      const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${i.url.substring(34).replaceAll('/','')}`);
+      const {data} = await api.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.url.substring(34).replaceAll('/','')}`);
       const types = data.types;
 
-      const result = await api.get(`https://pokeapi.co/api/v2/pokemon-species/${i.url.substring(34).replaceAll('/','')}`);
+      const result = await api.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.url.substring(34).replaceAll('/','')}`);
       const flavor_text = result ? result.data.flavor_text_entries[0].flavor_text : "";
 
       let typeName:any = [];
@@ -46,16 +46,16 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
         moviments.push(move.move.name);
       })
 
-      i.typename = typeName;
-      i.principalType = typeName[0] ? typeName[0] : null;
-      i.secondaryType = typeName[1] ? typeName[1] : null
-      i.weight = data.weight/10;
-      i.height = data.height/10;
-      i.habilities = habilities;
-      i.moviments = moviments;
-      i.flavorText = flavor_text;
+      pokemon.typename = typeName;
+      pokemon.principalType = typeName[0] ? typeName[0] : null;
+      pokemon.secondaryType = typeName[1] ? typeName[1] : null
+      pokemon.weight = data.weight/10;
+      pokemon.height = data.height/10;
+      pokemon.habilities = habilities;
+      pokemon.moviments = moviments;
+      pokemon.flavorText = flavor_text;
 
-      listaaux.push(i);    
+      listaaux.push(pokemon);    
          
       if(listaaux.length === newPokeList.length)
       {

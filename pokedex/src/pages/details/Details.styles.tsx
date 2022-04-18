@@ -4,7 +4,7 @@ import Backgroundd from '../../components/images/background/BackgrundHome.png'
 
 
 export const Container = styled.div`
-  max-width: 400px ;
+  max-width: 360px ;
   background-color: ${(props: any) => props.color};;
   width: 100%;  
   height: 100%;
@@ -12,7 +12,8 @@ export const Container = styled.div`
   box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   margin: auto auto;
-  margin-top: 1%;
+  margin-top: 3%;
+  margin-bottom: 10%;
   padding: 4px;
 `;
 

@@ -1,7 +1,3 @@
-import { connect } from "react-redux";
-import { useEffect, useState } from "react";
-import { getPokedex, handlePokemon } from "../../store/actions/PokedexAction";
-import { Container, Columns, LinkStyled } from "../../General.styles";
 import { 
   DivStyled, 
   ImgStyled, 
@@ -12,22 +8,27 @@ import {
   InputSearch,
   HeaderContainer
 } from "./Home.styles";   
+import { connect } from "react-redux";
+import { useEffect, useState } from "react";
+import { getPokedex, handlePokemon } from "../../store/actions/PokedexAction";
+import { Container, Columns, LinkStyled } from "../../General.styles";
 
 import Color from "../../enum/ColorsEnum";
 import Header from "../../components/header/Header";
+import GetIdPokemon from "../../Utils/GetIdPokemon";
+import FormatNamePokemon from "../../Utils/FormatNamePokemon";
 
 const Home = ({data, dispatch}: any) => {
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState<string>("")
 
   useEffect(()=>{
-  
-  async function GetPokedexAsync (dispatch: any) {
-    await getPokedex(dispatch);
+   async function GetPokedexAsync (dispatch: any) {
+     await getPokedex(dispatch);
    }
-
    GetPokedexAsync(dispatch);
   },[])
+
   return (
     <Container>
       <HeaderContainer>
@@ -39,27 +40,21 @@ const Home = ({data, dispatch}: any) => {
       </HeaderContainer>
       <Columns>
         { 
-          data.filter((value:any) =>{
-          if(search === ""){
-            return(value)
-          }else if(value.name.toLowerCase().includes(search.toLowerCase())){
-            return (value)
-          } else if (value.url.substring(34).replaceAll('/','').includes(search.toLowerCase())){
-            return (value)
-          }}).map((e: { name: string, url: any, image: string, typename: any, principalType: any }) => (            
-            <LinkStyled onClick={() => handlePokemon(e, dispatch)} to={'/detail'}>
-              <DivStyled color={Color[e.principalType]} key={e.url.substring(34).replaceAll('/','')}>
-                <IdPokemon color={Color[e.principalType]} >
-                <div>
-                {e.url.substring(34).replaceAll('/','') < 10
-                  ? `#00${e.url.substring(34).replaceAll('/','')}`
-                  : e.url.substring(34).replaceAll('/','') < 100
-                  ? `#0${e.url.substring(34).replaceAll('/','')}`
-                  : `#${e.url.substring(34).replaceAll('/','')}`}
-                  </div>
-                  </IdPokemon>              
-                <ImgStyled src={e.image} alt={e.name}/>                         
-                <Description color={Color[e.principalType]}>{e.name.charAt(0).toUpperCase() + e.name.substr(1)}</Description>                
+          data.filter((value: any) =>{
+            if(search === ""){
+              return(value)
+            }else if(value.name.toLowerCase().includes(search.toLowerCase())){
+              return (value)
+            } else if (value.url.substring(34).replaceAll('/','').includes(search.toLowerCase())){
+              return (value)
+            }
+          })
+          .map((pokemon: { name: string, url: any, image: string, typename: any, principalType: any }) => (            
+            <LinkStyled onClick={() => handlePokemon(pokemon, dispatch)} to={'/detail'} key={pokemon.name}>
+              <DivStyled color={Color[pokemon.principalType]}>
+                <IdPokemon color={Color[pokemon.principalType]}> {GetIdPokemon(pokemon.url)} </IdPokemon>              
+                <ImgStyled src={pokemon.image} alt={pokemon.name}/>                         
+                <Description color={Color[pokemon.principalType]}> {FormatNamePokemon(pokemon.name)} </Description>                
               </DivStyled>        
             </LinkStyled>
           ))
