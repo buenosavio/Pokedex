@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import Backgroundd from '../../components/images/background/BackgrundHome.png'
 
 
 export const Container = styled.div`
@@ -62,6 +62,17 @@ export const ImgPokemon = styled.img`
   z-index: 100;
 `;
 
+export const DivHeader = styled.div`
+height: 110px;
+`;
+
+export const H2header = styled.h2`
+margin: -9px 0px 0px -130px;
+`;
+export const Pheader = styled.p`
+margin: -1px 0px 0px 0px;
+`;
+
 //Styled card about Info
 export const GridInfo = styled.div`
   display: grid;
@@ -69,16 +80,24 @@ export const GridInfo = styled.div`
   justify-items: center;
   font-size: 10px;
 `;
-
-export const PokemonInfos = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-
 export const LeftDiv = styled.div`
 border-left: 1px solid #e0e0e0;
+margin: 0px ;
+`;
+
+export const ActiveP = styled.p`
+height: 16px;
+margin: 10px 0px 10px 8px ;
+font-size: 12px;
+line-height: 16px;
+`;
+
+export const ActiveH3 = styled.h3`
+text-align: center;
+`;
+
+export const ActiveImg = styled.img`
+margin-right: 10px;
 `;
 
 
@@ -87,6 +106,7 @@ export const StatsText = styled.div`
     display: flex;
     gap: 10px;
     justify-content: center;
+
 `;
 
 export const Barra = styled.div`
@@ -111,8 +131,6 @@ export const DivHabilities = styled.div<{ percent: any, color: string}>`
 
 export const ArrowBack = styled(Link)`
 color: #FFF;
-
-
 `;
 
 export const ArrowImg = styled.img`
@@ -179,5 +197,23 @@ width: 90px;
   background-color: ${(props: any) => props.color};;
 `;
 
+export const BackgroundImg = styled.div`
+  background-image: url(${Backgroundd});
+  width: 100%;
+  height: 100%;
+  margin-top: -15px;
+`;
+
+
+export const FavlorText = styled.p`
+height: 32px;
+width: 90%;
+font-size: 12px;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0em;
+text-align: center;
+margin: 16px 20px 10px ;
+`;
 
 

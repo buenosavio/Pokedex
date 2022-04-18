@@ -5,19 +5,26 @@ import {
 Barra,
 LeftDiv,
 TypeOne,
+ActiveP,
+Pheader,
 TypeTwo,
 ArrowImg,
+H2header,
 GridInfo,
+ActiveH3,
 ArrowBack,
 StatsText,
+ActiveImg,
 Container,
 TypeTitle,
-PokemonInfos,
+DivHeader,
+FavlorText,
 ImgPokemon,
 AboutTitle,
 ImgPokeball,
 HeaderDetails,
 DivHabilities,
+BackgroundImg,
 ContainerStats,
 BaseStatsTitle,
 DivHabilitiesBackGround,
@@ -25,6 +32,8 @@ DivHabilitiesBackGround,
 
 import Color from "../../enum/ColorsEnum";
 import pokeball from '../../components/images/pokeball/Pokeball.png'
+import Peso from '../../components/images/Peso/Peso.svg'
+import Regua from '../../components/images/regua/Regua.svg'
 import seta from '../../components/images/Seta/Seta.svg'
 
 const Details = ({activePokemon, dispatch}: any) => {
@@ -32,23 +41,24 @@ const colorPokemon = Color[activePokemon.typename[0]];
 
   return (
     <>
+   <BackgroundImg>
     <Container color={Color[activePokemon.typename[0]]}>
       
-    <div style={{height: "110px"}}>
+    <DivHeader>
       <ImgPokeball src={pokeball} alt="pokeball"/>
       <HeaderDetails>
       <ArrowBack to="/"><ArrowImg src={seta} /></ArrowBack>
-      <h2 style={{margin: "-9px 0px 0px -130px"}}>{activePokemon.name}</h2>
-      <p style={{margin: "-1px 0px 0px 0px"}}> {activePokemon.url.substring(34).replaceAll('/','')< 10
+      <H2header>{activePokemon.name}</H2header>
+      <Pheader> {activePokemon.url.substring(34).replaceAll('/','')< 10
                   ? `#00${activePokemon.url.substring(34).replaceAll('/','')}`
                   : activePokemon.url.substring(34).replaceAll('/','') < 100
                   ? `#0${activePokemon.url.substring(34).replaceAll('/','')}`
                   : `#${activePokemon.url.substring(34).replaceAll('/','')}`}
-      </p>
+      </Pheader>
       </HeaderDetails>
       <ImgPokemon src={activePokemon.image} alt="" />
      
-    </div>
+    </DivHeader>
     
       
     {/* about */}
@@ -61,24 +71,24 @@ const colorPokemon = Color[activePokemon.typename[0]];
       <AboutTitle color={Color[activePokemon.typename[0]]} >About</AboutTitle>
       <GridInfo>
             <div>     
-            <p>{activePokemon.weight} kg</p>
-            <h3> Weight</h3>  
+            <ActiveP><ActiveImg src={Peso} alt="icone de peso" />{activePokemon.weight} kg</ActiveP>
+            <ActiveH3> Weight</ActiveH3>  
             </div>
             <LeftDiv>
               <div>
-            <p>{activePokemon.height} m</p>
-            <h3>Height</h3>
+            <ActiveP><ActiveImg src={Regua} alt="icone de regua" />{activePokemon.height} m</ActiveP>
+            <ActiveH3>Height</ActiveH3>
             </div>
             </LeftDiv>
             <LeftDiv>          
-            <p>{activePokemon.moviments[0]}</p>
-            <p>{activePokemon.moviments[1]}</p>
-            <h3>Moves</h3>
+            <ActiveP>{activePokemon.moviments[0]}</ActiveP>
+            <ActiveP>{activePokemon.moviments[1]}</ActiveP>
+            <ActiveH3>Moves</ActiveH3>
             </LeftDiv>
         
       </GridInfo>
       <div>
-        <p>{activePokemon.flavorText.replace(/\n/g, ' ').replace(/\f/g, '')}</p>
+        <FavlorText>{activePokemon.flavorText.replace(/\n/g, ' ').replace(/\f/g, '')}</FavlorText>
       </div>
     </div>
 
@@ -104,18 +114,6 @@ const colorPokemon = Color[activePokemon.typename[0]];
             </div>
       </LeftDiv>
       <Barra>
-        {/* {activePokemon.habilities.map((item: any) => {
-           <DivHabilitiesBackGround  
-           color={colorPokemon} 
-           percent = {`${item.base_stat}`} 
-          >
-            <DivHabilities 
-              color={colorPokemon}
-              percent = {`${item.base_stat}`}
-            >
-            </DivHabilities>
-          </DivHabilitiesBackGround>
-        })} */}
          <DivHabilitiesBackGround color={colorPokemon}>
             <DivHabilities 
               color={colorPokemon}
@@ -163,6 +161,7 @@ const colorPokemon = Color[activePokemon.typename[0]];
     </StatsText>
     </ContainerStats>
     </Container>
+    </BackgroundImg>
     </>
   )
 }
