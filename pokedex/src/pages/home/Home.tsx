@@ -21,7 +21,12 @@ const Home = ({data, dispatch}: any) => {
   const [search, setSearch] = useState("")
 
   useEffect(()=>{
-    getPokedex(dispatch)
+  
+  async function GetPokedexAsync (dispatch: any) {
+    await getPokedex(dispatch);
+   }
+
+   GetPokedexAsync(dispatch);
   },[])
   return (
     <Container>
@@ -41,12 +46,18 @@ const Home = ({data, dispatch}: any) => {
             return (value)
           } else if (value.url.substring(34).replaceAll('/','').includes(search.toLowerCase())){
             return (value)
-          }})
-
-          .map((e: { name: string, url: string, image: string, typename: any, principalType: any }) => (            
+          }}).map((e: { name: string, url: any, image: string, typename: any, principalType: any }) => (            
             <LinkStyled onClick={() => handlePokemon(e, dispatch)} to={'/detail'}>
               <DivStyled color={Color[e.principalType]} key={e.url.substring(34).replaceAll('/','')}>
-                <IdPokemon color={Color[e.principalType]} >#{e.url.substring(34).replaceAll('/','')}</IdPokemon>              
+                <IdPokemon color={Color[e.principalType]} >
+                <div>
+                {e.url.substring(34).replaceAll('/','') < 10
+                  ? `#00${e.url.substring(34).replaceAll('/','')}`
+                  : e.url.substring(34).replaceAll('/','') < 100
+                  ? `#0${e.url.substring(34).replaceAll('/','')}`
+                  : `#${e.url.substring(34).replaceAll('/','')}`}
+                  </div>
+                  </IdPokemon>              
                 <ImgStyled src={e.image} alt={e.name}/>                         
                 <Description color={Color[e.principalType]}>{e.name.charAt(0).toUpperCase() + e.name.substr(1)}</Description>                
               </DivStyled>        
