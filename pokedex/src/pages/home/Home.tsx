@@ -17,17 +17,34 @@ import Color from "../../enum/ColorsEnum";
 import Header from "../../components/header/Header";
 import GetIdPokemon from "../../Utils/GetIdPokemon";
 import FormatNamePokemon from "../../Utils/FormatNamePokemon";
+import Loading from "../../components/loading/Loading";
+import Error from "../../components/error/Error";
 
 const Home = ({data, dispatch}: any) => {
 
   const [search, setSearch] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(()=>{
    async function GetPokedexAsync (dispatch: any) {
-     await getPokedex(dispatch);
+    await getPokedex(dispatch);     
+    setLoading(false)     
    }
-   GetPokedexAsync(dispatch);
+   GetPokedexAsync(dispatch);     
   },[])
+
+  if (error) {
+    return (
+      <Error />
+    )
+  }
+
+  if (loading) {
+    return(
+      <Loading/>
+    )
+  }
 
   return (
     <Container>

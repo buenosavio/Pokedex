@@ -1,6 +1,7 @@
 import { api } from "../../api"
 
 export const getPokedex = async (dispatch: any) => {
+  
   try {
     const {data} = await api.get('/pokemon?limit=10&offset=0')
     let pokeList = await (data.results)
