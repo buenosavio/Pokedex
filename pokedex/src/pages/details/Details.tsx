@@ -34,6 +34,8 @@ import Peso from '../../components/images/Peso/Peso.svg'
 import Regua from '../../components/images/regua/Regua.svg'
 import seta from '../../components/images/Seta/Seta.svg'
 import GetIdPokemon from "../../Utils/GetIdPokemon";
+import { RootState } from '../../store';
+import { PokemonDataDTO } from '../../models/PokemonDataDTO';
 
 const Details = ({activePokemon}: any) => {
 
@@ -109,7 +111,7 @@ const colorPokemon = Color[activePokemon.principalType];
   )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   activePokemon: state.PokedexReducer.activePokemon,
 })
 

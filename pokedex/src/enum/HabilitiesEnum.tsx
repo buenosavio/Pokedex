@@ -1,5 +1,4 @@
 enum HabilitiesEnum {
-  hp =  "HP" as any,
   attack = "ATK" as any,
   defense = "DEF" as any,
   "special-attack" = "SATK" as any,

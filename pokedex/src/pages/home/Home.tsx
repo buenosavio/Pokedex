@@ -20,26 +20,31 @@ import FormatNamePokemon from "../../Utils/FormatNamePokemon";
 import Loading from "../../components/loading/Loading";
 import Error from "../../components/error/Error";
 
-const Home = ({data, loading, error, dispatch}: any) => {
+import { RootState } from "../../store";
+import { AppDispatch } from "../../store";
+import { PokemonDataDTO } from "../../models/PokemonDataDTO";
+import PropsDTO from "../../models/PropsDTO";
+
+const Home = ({data, loading, error, dispatch}: PropsDTO) => {
 
   const [search, setSearch] = useState<string>("")
 
   useEffect(()=>{
-   async function GetPokedexAsync (dispatch: any) {
+   async function GetPokedexAsync (dispatch: AppDispatch) {
     await getPokedex(dispatch);     
    }
    GetPokedexAsync(dispatch);     
   },[])
 
-  if (error) {
-    return (
-      <Error />
-    )
-  }
-
   if (loading) {
     return(
       <Loading/>
+    )
+  }
+
+  if (!error) {
+    return (
+      <Error />
     )
   }
 
@@ -54,7 +59,7 @@ const Home = ({data, loading, error, dispatch}: any) => {
       </HeaderContainer>
       <Columns>
         { 
-          data.filter((value: any) =>{
+          data.filter((value: PokemonDataDTO) =>{
             if(search === ""){
               return(value)
             }else if(value.name.toLowerCase().includes(search.toLowerCase())){
@@ -63,7 +68,7 @@ const Home = ({data, loading, error, dispatch}: any) => {
               return (value)
             }
           })
-          .map((pokemon: { name: string, url: any, image: string, typename: any, principalType: any }) => (            
+          .map((pokemon: PokemonDataDTO) => (            
             <LinkStyled onClick={() => handlePokemon(pokemon, dispatch)} to={'/detail'} key={pokemon.name}>
               <DivStyled color={Color[pokemon.principalType]}>
                 <IdPokemon color={Color[pokemon.principalType]}> {GetIdPokemon(pokemon.url)} </IdPokemon>              
@@ -78,7 +83,7 @@ const Home = ({data, loading, error, dispatch}: any) => {
   )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   data: state.PokedexReducer.data,
   loading: state.PokedexReducer.loading,
   error: state.PokedexReducer.error,
