@@ -1,6 +1,6 @@
 const GetIdPokemon = (value: string) => {
 
-  const idPokemon = (value.split('/')[6])
+  const idPokemon = (value ? value.split('/')[6] : '0')
   const idPokemonInt = parseInt(idPokemon);
 
   return (
