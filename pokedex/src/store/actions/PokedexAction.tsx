@@ -1,5 +1,8 @@
 import { api } from "../../api"
 
+let loading = true;
+let error = false;
+
 export const getPokedex = async (dispatch: any) => {
   
   try {
@@ -12,11 +15,11 @@ export const getPokedex = async (dispatch: any) => {
       pokemon.image = urlImage;        
       newPokeList.push(pokemon);
     })  
-
+    loading = false
     await fitPokeList(newPokeList, dispatch);
-    
   } catch (error) {
     console.log(error);
+    error = true
   }
 }
 
@@ -60,7 +63,7 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
          
       if(listaaux.length === newPokeList.length)
       {
-        dispatch({type:'GET_POKEDEX', newPokeList});
+        dispatch({type:'GET_POKEDEX', newPokeList, loading, error});
       }
 
     } catch (error) {
@@ -70,8 +73,6 @@ const fitPokeList = async(newPokeList: any[], dispatch: any) => {
 }
 
 export const handlePokemon = (details: any, dispatch: any) => {
-  
-  console.log(details)
 
   const Details = {
     type : "GET_DETAILS",

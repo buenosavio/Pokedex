@@ -20,16 +20,13 @@ import FormatNamePokemon from "../../Utils/FormatNamePokemon";
 import Loading from "../../components/loading/Loading";
 import Error from "../../components/error/Error";
 
-const Home = ({data, dispatch}: any) => {
+const Home = ({data, loading, error, dispatch}: any) => {
 
   const [search, setSearch] = useState<string>("")
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<boolean>(false)
 
   useEffect(()=>{
    async function GetPokedexAsync (dispatch: any) {
     await getPokedex(dispatch);     
-    setLoading(false)     
    }
    GetPokedexAsync(dispatch);     
   },[])
@@ -83,6 +80,8 @@ const Home = ({data, dispatch}: any) => {
 
 const mapStateToProps = (state: any) => ({
   data: state.PokedexReducer.data,
+  loading: state.PokedexReducer.loading,
+  error: state.PokedexReducer.error,
   activePokemon: state.PokedexReducer.activePokemon
 })
 
